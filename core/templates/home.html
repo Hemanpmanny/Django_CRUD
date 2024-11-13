@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %} Hello world {% endblock title %}
+
+{% block content %}
+<section class="d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+    <div class="text-center text-black mb-4">
+        <div class="">
+            <h3>CRUD Project In Python</h3>
+        </div>
+    </div>
+
+    <!-- Add button -->
+    <div class=" mb-1 d-flex justify-content-end">
+        <a href="{% url 'add_stu' %}"><button class="btn btn-success">Add</button></a>
+        
+    </div>
+
+    <div class="col-10">
+        <div class="">
+            <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Roll</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                    {% for stu in students %}
+                  <tr>
+                    <th scope="row">{{stu.id}}</th>
+                    <td>{{stu.name}}</td>
+                    <td>{{stu.roll}}</td>
+                    <td>{{stu.city}}</td>
+                    <td>
+                      <form action="{% url 'delete_stu' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name='id' value="{{stu.id}}"> 
+                        
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                      </form>
+                     
+                    </td>
+                    <td>
+                      <form action="{% url 'update_stu' stu.id %}" method="GET">
+                        {% csrf_token %}
+                        <input type="hidden" name='id' value="{{stu.id}}"> 
+                        <button class="btn btn-primary btn-sm">Edit</button>
+                        
+                      </form>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  <!-- <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm">Edit</button>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm">Edit</button>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+                  </tr> -->
+                </tbody>
+              </table>
+        </div>
+    </div>
+</section>
+{% endblock content %}

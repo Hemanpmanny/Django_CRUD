@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %} Edit_student {% endblock title %}
+
+{% block content %}
+<section class="d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+    <div class="text-center text-black mb-4">
+        <div class="">
+            <h3>CRUD Project In Python</h3>
+        </div>
+    </div>
+
+    <!-- Add button
+    <div class=" mb-1 d-flex justify-content-end">
+        <button class="btn btn-success">Add</button> -->
+    </div>
+        <div class="col-sm-5">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-primary">
+        </form>
+    
+    </div>
+    </div>
+</section>
+{% endblock content %}
